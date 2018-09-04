@@ -1,0 +1,4 @@
+numpy==1.14.5
+tensorflow==1.10.0
+pycocotools==2.0.0
+scikit-image==0.14.0
