@@ -117,11 +117,11 @@ def evaluate(model_func, data_generator, checkpoint_path, num_batches=-1):
                 kp_map_pred = [construct_keypoint_map(_hm, _so_x, _so_y, _mo_x, _mo_y) \
                                for _hm, _so_x, _so_y, _mo_x, _mo_y in zip(hm, so_x, so_y, mo_x, mo_y)]
 
-                kp_map_pred = [construct_keypoint_map(_hm, _so_x, _so_y, _mo_x, _mo_y) \
+                kp_map_true = [construct_keypoint_map(_hm, _so_x, _so_y, _mo_x, _mo_y) \
                                for _hm, _so_x, _so_y, _mo_x, _mo_y in zip(tval['hm'], tval['so_x'], tval['so_y'], tval['mo_x'], tval['mo_y'])]
 
                 result['image'].append(tval['image'])
-                result['kp_map_true'].append(tval['kp_map'])
+                result['kp_map_true'].append(kp_map_true)
                 result['kp_map_pred'].append(kp_map_pred)
                 result['seg_true'].append(tval['seg'])
                 result['seg_pred'].append(seg)
