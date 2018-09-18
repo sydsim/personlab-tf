@@ -13,9 +13,9 @@ def bilinear(_indices, shape):
     indices = _indices.copy()
     EPS = 1e-7
     oy = tf.clip_by_value(indices[1], 0, H - 1 - EPS)
-    ox = tf.clip_by_value(indices[2], 0, H - 1 - EPS)
+    ox = tf.clip_by_value(indices[2], 0, W - 1 - EPS)
     iy = [tf.floor(oy), tf.floor(oy) + 1]
-    ix = [tf.floor(ox), tf.floor(oy) + 1]
+    ix = [tf.floor(ox), tf.floor(ox) + 1]
     idx_p = []
     for y in iy:
         for x in ix:
