@@ -24,7 +24,7 @@ def train(model_func, data_generator, checkpoint_path, log_dir):
 
     output, init_func = model_func(tensors['image'], checkpoint_path=checkpoint_path, is_training=True)
     hm_pred, seg_pred, so_x_pred, so_y_pred, mo_x_pred, mo_y_pred, lo_x_pred, lo_y_pred = output
-    hm_pred = tf.clip_by_value(hm_pred, EPS, 1-EPS)
+    hm_pred  = tf.clip_by_value(hm_pred,  EPS, 1-EPS)
     seg_pred = tf.clip_by_value(seg_pred, EPS, 1-EPS)
 
     hm_loss  = tf.reduce_mean(tf.where(tensors['hm'],  -tf.log(hm_pred),  -tf.log(1 - hm_pred)))

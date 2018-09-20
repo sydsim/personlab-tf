@@ -5,6 +5,9 @@ from . import config
 
 
 
+KP_COLORS = np.array([np.random.rand(3) for _ in range(config.NUM_KP)])
+
+
 def overlay(hm, color=None):
     H, W = hm.shape
     if color is None:
@@ -63,6 +66,7 @@ def offset_summary(img, hm, hm_true, off_x, off_y, alpha=0.4, stride=10):
 
     return res.astype(np.float32)
 
+
 def summary_skeleton(img, kp_map):
     res = img / 255
     H, W, C = img.shape
@@ -75,12 +79,13 @@ def summary_skeleton(img, kp_map):
             kp_i = kp_map[y, x, 1]
             kp_point[kp_i-1] = (x, y, 1)
 
-        for x, y, c in kp_point:
+        for kp_i, kp in enumerate(kp_point):
+            x, y, c = kp
             if c == 0:
                 continue
             start = (y-5, x-5)
             end = (y+5, x+5)
-            res[start[0]:end[0], start[1]:end[1]] = color
+            res[start[0]:end[0], start[1]:end[1]] = KP_COLORS[kp_i]
 
         for e1, e2 in config.EDGES:
             if kp_point[e1, 2] == 0 or kp_point[e2, 2] == 0:
