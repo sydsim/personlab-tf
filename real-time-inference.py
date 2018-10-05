@@ -36,7 +36,7 @@ for v in variables:
 
 checkpoint_path = './logs/model.ckpt-86162'
 
-init_assign_func = slim.d(checkpoint_path, restore_map)
+init_assign_func = slim.assign_from_checkpoint_fn(checkpoint_path, restore_map)
 
 sess = tf.Session()
 init_assign_func(sess)
