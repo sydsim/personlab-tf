@@ -11,7 +11,7 @@ def train(model_func, data_generator, checkpoint_path, log_dir):
     EPS = 1e-7
     types = tuple(t['type'] for t in tensor_info)
     d = tf.data.Dataset.from_generator(data_generator, output_types=types)
-    d = d.batch(config.BATCH_SIZE)
+    d = d.batch(config.BATCH_SIZE, drop_remainder=True)
     d = d.shuffle(config.SHUFFLE_BUFFER_SIZE)
     d = d.repeat(config.NUM_EPOCH)
     d = d.prefetch(config.PREFETCH_SIZE)
